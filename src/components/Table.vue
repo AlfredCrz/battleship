@@ -1,10 +1,7 @@
 <template>
-  <div class="board" id="board">
-    
-    <div>
-      <div class="matrix" id="create-board">
-        
-      </div>
+  <div class="board" id="board" >
+    <div class="matrix" id="create-board">
+      
     </div>
   </div>
 </template>
@@ -44,15 +41,28 @@ export default {
 </script>
 
 <style>
-  .table {
-    padding: 20px;
+  .board {
     float: right;
-    width: 70%;
-    height: 100%;
+    width: 69%;
+    height: 500px;
+    background-color: #010C17;
   }
 
   .matrix {
-    height: 80%;
-    width: 50%;
+    margin-top: 50px;
+    margin-left: 50px; 
+    width: 80%;
+    height: 100%;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    background-image: url(../icon/font-game.jpg);
+  }
+
+  td, th {
+    border: 2px solid #00091C;
+    padding: 8px;
   }
 </style>

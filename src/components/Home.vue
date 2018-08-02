@@ -25,6 +25,9 @@ export default {
 <style>
   .hello {
     text-align: center;
-    margin-top: 0%;
+    margin-top: 0px;
+    background-color: black;
+    color: white;
+    padding: 20px;
   }
 </style>
