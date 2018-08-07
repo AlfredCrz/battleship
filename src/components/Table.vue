@@ -1,7 +1,14 @@
 <template>
   <div class="board" id="board" >
     <div class="matrix" id="create-board">
-      
+      <table class="batle-table" border="1">
+        <tbody>
+          <tr v-for="row in rows" :key="row">
+            <td v-for="column in columns" :key="column">
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -10,20 +17,6 @@
 import {EventBus} from '@/services/event-bus';
 export default {
   name: 'board',
-  methods: {
-    drawBoard() {
-       var codigoHTML="<table border=\"1\"><tbody>";
-        for (var i = 0; i < this.rows; i++) {
-          codigoHTML+="<tr>";
-          for (var j = 0; j < this.columns; j++) {
-            codigoHTML+="<td></td>";
-          }
-          codigoHTML+="</tr>";
-        }
-        codigoHTML+="</tbody></table>";
-        document.getElementById("create-board").innerHTML = codigoHTML;
-      }
-  },
   data() {
     return {
       rows: '',
@@ -31,10 +24,9 @@ export default {
     }
   },
   mounted() {
-    EventBus.$on('dataBoard',(row, col) => {
-      this.rows = row;
-      this.columns = col;
-      this.drawBoard();
+    EventBus.$on('size-change',(rows, cols) => {
+      this.rows = rows;
+      this.columns = cols;
     })
   },
 };
