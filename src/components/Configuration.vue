@@ -2,9 +2,9 @@
   <div class="configuration">
     <h2>Select size</h2>
     <label class="label-rows">Rows: </label>
-    <input type="number" value="" id="rows"><br>
+    <input type="number" v-model.number="rows" value="" id="rows"><br>
     <label class="label-columns">Columns: </label>
-    <input type="number" value="" id="columns">
+    <input type="number" v-model.number="cols" value="" id="columns">
     <button type="button" @click="getDataBoard()">Create Board</button>
     <hr><hr><hr><hr><hr>
     <h2>Join up</h2>
@@ -16,12 +16,15 @@
 import {EventBus} from '@/services/event-bus';
 export default {
   name: 'configuration',
+  data() {
+    return {
+      rows: null,
+      cols: null
+    }
+  },
   methods: {
     getDataBoard() {
-      var columns=(document.getElementById("columns").value);
-      var rows=(document.getElementById("rows").value);
-      console.log(rows, columns);
-      EventBus.$emit('dataBoard',rows, columns);  
+      EventBus.$emit('size-change',this.rows, this.cols);
     }
   }
 };	
