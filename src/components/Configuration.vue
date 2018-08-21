@@ -2,10 +2,10 @@
   <div class="configuration">
     <h2>Select size</h2>
     <label class="label-rows">Rows: </label>
-    <input type="number" v-model.number="rows" value="" id="rows"><br>
+    <input type="number" v-model.number="rows" id="rows" @click="getDataBoard()"><br>
     <label class="label-columns">Columns: </label>
-    <input type="number" v-model.number="cols" value="" id="columns">
-    <button type="button" @click="getDataBoard()">Create Board</button>
+    <input type="number" v-model.number="cols" id="columns" @click="getDataBoard()">
+    <button type="button" @click="sendData()">Create Board</button>
     <hr><hr><hr><hr><hr>
     <h2>Join up</h2>
     <input type="text" id=""><button class="join">go</button>
@@ -24,16 +24,19 @@ export default {
   },
   methods: {
     getDataBoard() {
-      EventBus.$emit('size-change',this.rows, this.cols);
+      EventBus.$emit('size-change',this.rows, this.cols); 
+    },
+    sendData() {
+      this.$router.push('/game');
     }
   }
 };	
 </script>
 
 <style>
-	.configuration {
-		float: left;
-		width: 30%;
+  .configuration {
+    float: left;
+    width: 30%;
     height: 500px;
     border-right: 1px solid black;
     background-color: #010617;
