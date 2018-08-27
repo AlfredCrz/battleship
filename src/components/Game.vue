@@ -13,8 +13,8 @@
       <div class="matrix" id="create-board">
     		<table class="batle-table" border="1">
     			<tbody>
-    				<tr v-for="row in rows" :key="row">
-    					<td v-for="column in columns" :key="column" :id="row+''+column">
+    				<tr v-for="row in 10" :key="row">
+    					<td v-for="column in 10" :key="column" :id="row+''+column">
                 <span>{{ row }} {{ column}}</span>
     					</td>
     				</tr>
