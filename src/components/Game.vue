@@ -1,33 +1,31 @@
 <template>
-	<div class="game" id="game">
+  <div class="game" id="game" >
     <div class="ships">
       <div class="ships-container" id="ships-container">
-        <div class="ship-one"> <img class="position-ship" src="../icon/ship-1.jpg"></div>
-        <div class="ship-two"> <img class="position-ship" src="../icon/ship-2.png"></div>
-        <div class="ship-three"> <img class="position-ship" src="../icon/ship-3.jpg"></div>
-        <div class="ship-four"> <img class="position-ship" src="../icon/ship-4.png"></div>
-        <div class="ship-five"> <img class="position-ship" src="../icon/ship-5.jpg"></div>
+        <div @click="girar()" id="2" class="ship"><img class="position-ship-two" src="../icon/ship-2.png"></div>
+        <div id="3" class="ship"><img class="position-ship-three" src="../icon/ship-3.jpg"></div>
+        <div id="4" class="ship"><img class="position-ship-four" src="../icon/ship-4.png"></div>
+        <div id="5" class="ship"><img class="position-ship-five" src="../icon/ship-5.jpg"></div>
       </div>
+      <hr><hr><hr><hr><hr>
+      <button @click="save()">Play Game</button>
     </div>
-		<div class="board">
-      <div class="matrix" id="create-board">
-    		<table class="batle-table" border="1">
-    			<tbody>
-    				<tr v-for="row in 10" :key="row">
-    					<td v-for="column in 10" :key="column" :id="row+''+column">
-                <span>{{ row }} {{ column}}</span>
-    					</td>
-    				</tr>
-    			</tbody>
-    		</table>
-      </div>
+    <div class="board-game">
+        <table class="batalla" border="1">
+            <tr v-for="row in 20" :key="row">
+              <td class="casilla" v-for="column in 20" :key="column" :id="row+'-'+column">
+              </td>
+            </tr>
+        </table>
     </div>
-	</div>
+  </div>
 </template>
 
 <script>
 import * as dragula from 'dragula';
 import {EventBus} from '@/services/event-bus';
+var dato = 0 ;
+console.log(dato)
 export default {
   name: 'game',
   data() {
@@ -37,114 +35,128 @@ export default {
     }
   },
   mounted() {
-    EventBus.$on('size-change',(rows, cols) => {
-      this.rows = rows;
+    EventBus.$on('size-board',(rows, cols) => {
+      dato = rows;
+      this.rows = rows,
       this.columns = cols;
     });
     this.dragAndDrop();
-
   },
   methods: {
     dragAndDrop() {
-      for (var i = 1; i < 11; i++) {
-        for (var j = 1; j < 11; j++) {
-              dragula([document.getElementById('ships-container'), document.getElementById(i+''+j)], {
-                copy: function (el, source) {
-                  return source === document.getElementById('ships-container')
-                },
-                accepts: function (el, target) {
-                  return target !== document.getElementById('ships-container')
-                      }
-                });
+      for (var i = 1; i < 21; i++) {
+        for (var j = 1; j < 21; j++) {
+          dragula([document.getElementById('ships-container'), document.getElementById(i+'-'+j)], {
+            copy: function (el, source) {
+              return source === document.getElementById('ships-container')
+            },
+            accepts: function (el, target) {
+              return target !== document.getElementById('ships-container')
+            }
+          });
         }
       }
-      console.log('as');
+    },
+    girar() {
+      console.log('girar')
+      console.log(dato)
+
+    },
+    save() {
+      for (var i = 1; i < 11; i++) {
+        for (var j = 1; j < 11; j++) {
+          console.log(document.getElementById(i + '-' + j).childNodes)
+        }
+      }
     }
   }
 };
 </script>
 
 <style>
-  .game {
 
-  }
+.ships-container {
+  width: 100%;
+  height: 50%;
+  background-color: white;
+}
 
-  .ships {
-    float: left;
-    width: 30%;
-    height: 500px;
-  }
+.ships-container > .ship > img {
+  width: 200px;
+  height: 40px;
+}
 
-  .ships-container {
-    width: 250px;
-    height: 300px;
-  }
+.ships-container > .ship {
+  padding: 20px;
+}
 
+.ships-container > .ship > img:hover {
+  border: 1px solid black;
+}
 
-  .ship-one {
-    width: 100%;
-    height: 60px;
-  }
+td > div > .position-ship-two {
+  width: 56px;
+  height: 23px;
+}
 
-  .position-ship {
-    width: 100%;
-    height: 100%;
-  }
+td > div > .position-ship-five:hover {
+  transform: rotateZ(90deg);
+}
 
-  .ship-two {
-    width: 100%;
-    height: 60px;
-  }
+td > div > .position-ship-three {
+  width: 84px;
+  height: 23px;
+}
 
-  .ship-three {
-    width: 100%;
-    height: 60px;
-  }
+td > div > .position-ship-four {
+  width: 112px;
+  height: 23px;
+}
 
-  .ship-four {
-    width: 100%;
-    height: 60px;
-  }
+td > div > .position-ship-five {
+  width: 140px;
+  height: 23px;
+}
 
-  .ship-five {
-    width: 100%;
-    height: 60px;
-    border: 1px solid black;
-  }
+.ship {
+  width: 20px;
+  height: 20px;
+}
 
-  .board {
-    float: right;
-    width: 69%;
-    height: 500px;
-    background-color: #010C17;
-  }
+.ships {
+  float: left;
+  width: 20%;
+  height: 580px;
+  background-color: blue;
+  box-sizing: border-box;
+}
 
-  .ships {
-    float: left;
-    width: 31%;
-    height: 500px;
-  }
+.board-game {
+  float: right;
+  width: 80%;
+  height: 580px;
+  padding: 10px;
+  background-color: #010C17;
+  box-sizing: border-box;
+}
 
-  .matrix {
-    margin-top: 50px;
-    margin-left: 50px; 
-    width: 80%;
-    height: 80%;
-  }
+.casilla {
+  padding: 0px;
+  width: 28px;
+  height: 28px;
+  border: 1px solid black;
+  box-sizing: border-box;
+}
 
-  .batle-table {
-    width: 100%;
-    height: 90%;
-  }
+.casilla:hover {
+  background-color: blue;
+  opacity: 0.5;
+}
 
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    background-image: url(../icon/font-game.jpg);
-  }
+.batalla {
+  margin: auto;
+  border-collapse: collapse;
+  background-image: url(../icon/font-game.jpg);
+}
 
-  td, th {
-    border: 2px solid #00091C;
-    padding: 8px;
-  }
 </style>

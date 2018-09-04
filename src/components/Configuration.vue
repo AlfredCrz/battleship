@@ -31,6 +31,7 @@ export default {
   methods: {
     getDataBoard() {
       EventBus.$emit('size-change',this.rows, this.cols); 
+      console.log('datos mandados configuration'+this.rows+this.cols);
     },
     create(rows, cols) {
       const URL = 'http://localhost:3000/game?token=';
@@ -44,9 +45,9 @@ export default {
     },
     goBoard() {
     /*/game/:gameId/player/:playerId/board*/
-      console.log('datos mandados'+this.rows+this.cols);
-      this.$router.push('/game/'+this.game+'/player/'+this.player+'/board/');
+      console.log('datos mandados configuration'+this.rows+this.cols);
       EventBus.$emit('size-board',this.rows, this.cols); 
+      this.$router.push('/game/'+this.game+'/player/'+this.player+'/board/');
     }
   }
 };  
@@ -56,9 +57,9 @@ export default {
   .configuration {
     float: left;
     width: 30%;
-    height: 500px;
-    border-right: 1px solid black;
+    height: 580px;
     background-color: #010617;
+    box-sizing: border-box;
   }
 
   div input {
