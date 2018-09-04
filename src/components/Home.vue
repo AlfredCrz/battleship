@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <h1 class="hello">{{ msg }}</h1>
+  <div class="home">
 	<Configuration/>
 	<Board/>
   </div>
@@ -14,20 +13,9 @@ export default {
   components: {
   	Configuration,
   	Board
-  },
-  props: {
-    msg: String
   }
-  
 }
 </script>
 
 <style>
-  .hello {
-    text-align: center;
-    margin-top: 0px;
-    background-color: black;
-    color: white;
-    padding: 20px;
-  }
 </style>

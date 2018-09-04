@@ -1,19 +1,23 @@
 <template>
   <div id="app">
-    <Home msg="Battleship"/>
+  	<h1 class="header">*|*  Battleship *|*</h1>
+  <router-view/>
   </div>
 </template>
 
-<script>
-import Home from '@/components/Home.vue'
-
-export default {
-  name: 'app',
-  components: {
-    Home
-  }
-}
-</script>
-
 <style>
+html,body {
+  height: 100%;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.header {
+    text-align: center;
+    margin: 0px;
+    background-color: black;
+    color: white;
+    padding: 20px;
+}
 </style>

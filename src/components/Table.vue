@@ -4,7 +4,7 @@
       <table class="batle-table" border="1">
         <tbody>
           <tr v-for="row in rows" :key="row">
-            <td v-for="column in columns" :key="column">
+            <td class="box" v-for="column in columns" :key="column">
             </td>
           </tr>
         </tbody>
@@ -35,26 +35,27 @@ export default {
 <style>
   .board {
     float: right;
-    width: 69%;
-    height: 500px;
+    width: 70%;
+    height: 580px;
     background-color: #010C17;
+    box-sizing: border-box;
   }
 
   .matrix {
-    margin-top: 50px;
-    margin-left: 50px; 
+    margin-top: 20px;
+    margin-left: 80px; 
     width: 80%;
     height: 100%;
   }
 
-  table {
-    border-collapse: collapse;
+  .batle-table {
     width: 100%;
+    height: 90%;
+    border-collapse: collapse;
     background-image: url(../icon/font-game.jpg);
   }
 
-  td, th {
+  .box {
     border: 2px solid #00091C;
-    padding: 8px;
   }
 </style>
